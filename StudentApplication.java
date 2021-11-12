@@ -1,10 +1,15 @@
-package com.example.nsplayer2;
+package com.example.nsp.layer2;
 
 import java.time.LocalDate;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -62,12 +67,16 @@ public class StudentApplication {
 	
 	@ManyToOne
 	@JoinColumn(name= "sid")
-	@JoinColumn(name = "schid")
-	
 	
 	private Student sid;
-	private Scheme  schid;
 	
+
+	@ManyToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+	@JoinTable(name="schemes", 
+			joinColumns={@JoinColumn(name="schid")},
+			inverseJoinColumns={@JoinColumn(name="sid")})
+	private Set<Scheme> schemes; //getSchemes()
+
 	
 	public int getStudentId() {
 		return StudentId;
@@ -75,11 +84,13 @@ public class StudentApplication {
 	public void setStudentId(int studentId) {
 		StudentId = studentId;
 	}
-	public Scheme getSchid() {
-		return schid;
+	
+	
+	public Set<Scheme> getSchemes() {
+		return schemes;
 	}
-	public void setSchid(Scheme schid) {
-		this.schid = schid;
+	public void setSchemes(Set<Scheme> schemes) {
+		this.schemes = schemes;
 	}
 	public Student getSid() {
 		return sid;

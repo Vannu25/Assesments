@@ -1,14 +1,20 @@
-package com.example.nsplayer2;
+package com.example.nsp.layer2;
 
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+
 
 @Entity
 @Table(name = "student")
@@ -16,53 +22,58 @@ public class Student {
 	
 	@Id
 	@Column(name= "sid")
-	private int StudentId;
+	//@GeneratedValue
+	private int studentId;
 	
 	@Column(name = "inscode")
-	private int InstituteCode;
+	private int instituteCode;
 	
 	@Column(name = "sname")
-	private String StudentName;
+	private String studentName;
 	
 	@Column(name = "dob")
-	private LocalDate DOB;
+	private LocalDate dob;
 	
 	@Column(name = "genger")
-	private String Gender;
+	private String gender;
 	
 	@Column(name = "monumber")
-	private int MobileNumber;
+	private String mobileNumber;
 	
 	@Column(name = "eid")
-	private String EmailId;
+	private String emailId;
 	
 	@Column(name = "state")
-	private String State;
+	private String state;
 	
 	@Column(name = "dist")
-	private String District;
+	private String district;
 	
 	@Column (name= "anum")
-	private int AadharNumber;
+	private long aadharNumber;
 	
 	@Column (name = "ifsc")
 	private String IFSCcode;
 	
 	@Column (name = "bankaccnum")
-	private int BankAccNumber;
+	private long bankAccNumber;
 	
 	@Column (name = "bankaccname")
-	private String BankAccName;
+	private String bankAccName;
 	
 	@Column (name = "bal")
-	private Float BankBalance;
+	private Float bankBalance;
 	
 	@Column (name = "pwd")
-	private String Password;
+	private String password;
 	
+			
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "institue") //one student has Many studentapplication
+	private Set<StudentApplication> stuSet = new HashSet<StudentApplication>();
 	
-	@OneToMany
-	Set<StudentApplication> stuSet = new HashSet<StudentApplication>();
+	@ManyToOne
+	@JoinColumn(name = "inscode")
+	Institute institute;
 	
 	public Set<StudentApplication> getStuSet() {
 		return stuSet;
@@ -71,64 +82,64 @@ public class Student {
 		this.stuSet = stuSet;
 	}
 	public int getStudentId() {
-		return StudentId;
+		return studentId;
 	}
 	public void setStudentId(int studentId) {
-		StudentId = studentId;
+		studentId = studentId;
 	}
 	public int getInstituteCode() {
-		return InstituteCode;
+		return instituteCode;
 	}
 	public void setInstituteCode(int instituteCode) {
-		InstituteCode = instituteCode;
+		instituteCode = instituteCode;
 	}
 	public String getStudentName() {
-		return StudentName;
+		return studentName;
 	}
 	public void setStudentName(String studentName) {
-		StudentName = studentName;
+		studentName = studentName;
 	}
 	public LocalDate getDOB() {
-		return DOB;
+		return dob;
 	}
 	public void setDOB(LocalDate dOB) {
-		DOB = dOB;
+		dob = dOB;
 	}
 	public String getGender() {
-		return Gender;
+		return gender;
 	}
 	public void setGender(String gender) {
-		Gender = gender;
+		gender = gender;
 	}
-	public int getMobileNumber() {
-		return MobileNumber;
+	public String getMobileNumber() {
+		return mobileNumber;
 	}
-	public void setMobileNumber(int mobileNumber) {
-		MobileNumber = mobileNumber;
+	public void setMobileNumber(String mobileNumber) {
+		mobileNumber = mobileNumber;
 	}
 	public String getEmailId() {
-		return EmailId;
+		return emailId;
 	}
 	public void setEmailId(String emailId) {
-		EmailId = emailId;
+		emailId = emailId;
 	}
 	public String getState() {
-		return State;
+		return state;
 	}
 	public void setState(String state) {
-		State = state;
+		state = state;
 	}
 	public String getDistrict() {
-		return District;
+		return district;
 	}
 	public void setDistrict(String district) {
-		District = district;
+		district = district;
 	}
-	public int getAadharNumber() {
-		return AadharNumber;
+	public long getAadharNumber() {
+		return aadharNumber;
 	}
-	public void setAadharNumber(int aadharNumber) {
-		AadharNumber = aadharNumber;
+	public void setAadharNumber(long aadharNumber) {
+		aadharNumber = aadharNumber;
 	}
 	
 	public String getIFSCcode() {
@@ -137,29 +148,29 @@ public class Student {
 	public void setIFSCcode(String iFSCcode) {
 		IFSCcode = iFSCcode;
 	}
-	public int getBankAccNumber() {
-		return BankAccNumber;
+	public long getBankAccNumber() {
+		return bankAccNumber;
 	}
-	public void setBankAccNumber(int bankAccNumber) {
-		BankAccNumber = bankAccNumber;
+	public void setBankAccNumber(long bankAccNumber) {
+		bankAccNumber = bankAccNumber;
 	}
 	public String getBankAccName() {
-		return BankAccName;
+		return bankAccName;
 	}
 	public void setBankAccName(String bankAccName) {
-		BankAccName = bankAccName;
+		bankAccName = bankAccName;
 	}
 	public Float getBankBalance() {
-		return BankBalance;
+		return bankBalance;
 	}
 	public void setBankBalance(Float bankBalance) {
-		BankBalance = bankBalance;
+		bankBalance = bankBalance;
 	}
 	public String getPassword() {
-		return Password;
+		return password;
 	}
 	public void setPassword(String password) {
-		Password = password;
+		password = password;
 	}
 
 

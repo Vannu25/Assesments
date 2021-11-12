@@ -1,12 +1,29 @@
-package com.example.nsplayer2;
+package com.example.nsp.layer2;
+
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
 public class Ministry {
-
+    
+	@Id
+	@Column(name = "mid")
+	@GeneratedValue
 	private int MinistryId;
+	
+	@Column(name = "pwd")
 	private String Password;
+	
+	@Column(name = "officernm")
 	private String OfficerName;
+	
+	@Column(name = "monum")
 	private int MobileNumber;
+	
+	@Column(name = "eid")
 	private String EmailId;
+	
+	
 	public int getMinistryId() {
 		return MinistryId;
 	}
